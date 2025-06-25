@@ -1,0 +1,16 @@
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const contentElement = document.getElementById('document-content');
+        const searchQuery = decodeURIComponent('<%- searchQuery %>');
+
+        if (contentElement && searchQuery) {
+            let content = contentElement.textContent;
+            const regex = new RegExp(`(${searchQuery.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+            contentElement.innerHTML = content.replace(regex, '<span class="highlight">$1</span>');
+        }
+    });
+</script> 

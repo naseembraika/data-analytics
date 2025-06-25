@@ -1,0 +1,41 @@
+<div class="container mx-auto px-4 py-8">
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-oxford-900">Welcome, <%= user.name %></h1>
+        <p class="text-oxford-600 mt-2">Manage your documents efficiently</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Quick Upload -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold text-oxford-900 mb-4">Quick Upload</h2>
+            <a href="/documents/upload" class="block w-full bg-oxford-600 text-white text-center py-2 rounded-md hover:bg-oxford-700">
+                Upload New Document
+            </a>
+        </div>
+        <!-- Search -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold text-oxford-900 mb-4">Search Documents</h2>
+            <form action="/documents/search" method="GET" class="flex">
+                <input type="text" name="query" placeholder="Search documents..." class="flex-1 border border-oxford-300 rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-oxford-500">
+                <button type="submit" class="bg-oxford-600 text-white px-4 py-2 rounded-r-md hover:bg-oxford-700">
+                    Search
+                </button>
+            </form>
+        </div>
+        <!-- Statistics -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-semibold text-oxford-900 mb-4">Statistics</h2>
+            <a href="/documents/statistics" class="block w-full bg-oxford-100 text-oxford-700 text-center py-2 rounded-md hover:bg-oxford-200">
+                View Statistics
+            </a>
+        </div>
+    </div>
+    <!-- Recent Documents -->
+    <div class="mt-8">
+        <h2 class="text-2xl font-bold text-oxford-900 mb-4">Recent Documents</h2>
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <a href="/documents" class="text-oxford-600 hover:text-oxford-800">
+                View All Documents →
+            </a>
+        </div>
+    </div>
+</div> 

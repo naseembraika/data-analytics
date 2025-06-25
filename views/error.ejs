@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error - Document Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        oxford: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-oxford-50">
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <div>
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-oxford-900">
+                    Error
+                </h2>
+                <div class="mt-8 bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                    <div class="text-center">
+                        <p class="text-red-600 text-lg mb-4"><%= message %></p>
+                        <% if (error && error.stack) { %>
+                            <div class="mt-4 text-left">
+                                <pre class="bg-gray-100 p-4 rounded text-sm overflow-x-auto"><%= error.stack %></pre>
+                            </div>
+                        <% } %>
+                        <div class="mt-6">
+                            <a href="/" class="text-oxford-600 hover:text-oxford-500">
+                                Return to Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

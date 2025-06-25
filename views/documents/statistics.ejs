@@ -1,0 +1,23 @@
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-oxford-900 mb-6">Document Statistics</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Total Documents Card -->
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-xl font-semibold text-oxford-900 mb-2">Total Documents</h2>
+            <p class="text-4xl font-bold text-oxford-600"><%= totalDocuments %></p>
+        </div>
+
+        <!-- Total Size Card -->
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <h2 class="text-xl font-semibold text-oxford-900 mb-2">Total Document Size</h2>
+            <p class="text-4xl font-bold text-oxford-600"><%= (totalSize / (1024 * 1024)).toFixed(2) %> MB</p>
+        </div>
+    </div>
+
+    <div class="mt-8 text-center">
+        <a href="/dashboard" class="inline-block bg-oxford-600 hover:bg-oxford-700 text-white font-bold py-2 px-4 rounded">
+            Back to Dashboard
+        </a>
+    </div>
+</div> 

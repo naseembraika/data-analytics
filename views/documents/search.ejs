@@ -1,0 +1,28 @@
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-oxford-900 mb-6">Search Results for "<%= query %>"</h1>
+
+    <% if (documents && documents.length > 0) { %>
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <ul class="divide-y divide-gray-200">
+                <% documents.forEach(function(document) { %>
+                    <li class="px-6 py-4 flex items-center justify-between">
+                        <div class="flex-1">
+                            <p class="text-lg font-semibold text-oxford-800"><%= document.name %></p>
+                            <p class="text-sm text-oxford-500"><%= document.type %> - <%= (document.size / 1024 / 1024).toFixed(2) %> MB</p>
+                            <p class="text-xs text-oxford-400">Uploaded: <%= document.date ? document.date.toLocaleString() : 'N/A' %></p>
+                        </div>
+                        <div>
+                            <!-- Add actions like view, download, delete -->
+                            <a href="/documents/<%= document._id %>?query=<%= encodeURIComponent(query) %>" class="text-oxford-600 hover:text-oxford-900 mr-2">View</a>
+                            <a href="#" class="text-oxford-600 hover:text-oxford-900">Download</a>
+                        </div>
+                    </li>
+                <% }); %>
+            </ul>
+        </div>
+    <% } else { %>
+        <div class="bg-white shadow-md rounded-lg p-6 text-center text-oxford-600">
+            <p>No documents found matching your search query.</p>
+        </div>
+    <% } %>
+</div> 

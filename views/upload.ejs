@@ -1,0 +1,95 @@
+<%- include('layouts/main') %>
+
+<div class="max-w-4xl mx-auto">
+    <div class="bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold text-oxford-800 mb-6">Upload Documents</h1>
+        
+        <!-- Drag and Drop Zone -->
+        <div id="document-upload" class="dropzone mb-6">
+            <div class="dz-message needsclick">
+                <div class="text-oxford-600">
+                    <svg class="mx-auto h-12 w-12 text-oxford-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="mt-2">Drag and drop your files here, or click to select files</p>
+                    <p class="text-sm text-oxford-500">Supported formats: PDF, DOC, DOCX</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Progress -->
+        <div id="upload-progress" class="hidden">
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div class="bg-oxford-600 h-2.5 rounded-full" style="width: 0%"></div>
+            </div>
+            <p class="text-sm text-oxford-600 mt-2">Uploading...</p>
+        </div>
+
+        <!-- Recent Uploads -->
+        <div class="mt-8">
+            <h2 class="text-xl font-semibold text-oxford-800 mb-4">Recent Uploads</h2>
+            <div class="space-y-4">
+                <% if (typeof recentUploads !== 'undefined' && recentUploads.length > 0) { %>
+                    <% recentUploads.forEach(upload => { %>
+                        <div class="flex items-center justify-between p-4 bg-oxford-50 rounded-lg">
+                            <div class="flex items-center">
+                                <svg class="h-8 w-8 text-oxford-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                </svg>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-oxford-900"><%= upload.title %></p>
+                                    <p class="text-sm text-oxford-500"><%= upload.fileType %> • <%= (upload.size / 1024 / 1024).toFixed(2) %> MB</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <a href="/documents/<%= upload._id %>" class="text-oxford-600 hover:text-oxford-800">
+                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                    </svg>
+                                </a>
+                                <a href="/documents/download/<%= upload._id %>" class="text-oxford-600 hover:text-oxford-800">
+                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <p class="text-oxford-500 text-center py-4">No recent uploads</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Custom Dropzone configuration
+    Dropzone.options.documentUpload = {
+        paramName: "document",
+        maxFilesize: 10, // MB
+        acceptedFiles: ".pdf,.doc,.docx",
+        addRemoveLinks: true,
+        dictDefaultMessage: "Drop files here or click to upload",
+        init: function() {
+            this.on("uploadprogress", function(file, progress) {
+                const progressBar = document.querySelector('#upload-progress .bg-oxford-600');
+                const progressContainer = document.getElementById('upload-progress');
+                progressContainer.classList.remove('hidden');
+                progressBar.style.width = progress + '%';
+            });
+
+            this.on("success", function(file, response) {
+                if (response.success) {
+                    window.location.reload();
+                }
+            });
+
+            this.on("error", function(file, errorMessage) {
+                console.error(errorMessage);
+                // Show error message to user
+            });
+        }
+    };
+</script> 
